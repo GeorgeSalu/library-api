@@ -15,7 +15,7 @@
 	<description>api do projeto de bibliotecas</description>
 
 	<properties>
-		<java.version>15</java.version>
+		<java.version>1.8</java.version>
 	</properties>
 
 	<dependencies>
