@@ -1,5 +1,6 @@
 package com.library.api.resource;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,22 +17,22 @@ import com.library.model.entity.Book;
 public class BookController {
 	
 	private BookService service;
+	private ModelMapper modelMapper;
 	
-	public BookController(BookService service) {
+	
+	public BookController(BookService service, ModelMapper modelMapper) {
 		this.service = service;
+		this.modelMapper = modelMapper;
 	}
 
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public BookDTO create(@RequestBody BookDTO dto) {
-		Book entity = new Book();
-		entity.setAuthor(dto.getAuthor());
-		entity.setTitle(dto.getTitle());
-		entity.setIsbn(dto.getIsbn());
+		Book entity = modelMapper.map(dto, Book.class);
 		
 		entity = service.save(entity);
 		
-		return BookDTO.builder(entity);
+		return modelMapper.map(entity, BookDTO.class);
 	}
 	
 }
