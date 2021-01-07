@@ -1,5 +1,8 @@
 package com.library.api.resource;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,7 +15,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -41,11 +43,11 @@ public class BookControllerTest {
 		
 		mvc
 			.perform(requestBuilder)
-			.andExpect(MockMvcResultMatchers.status().isCreated())
-			.andExpect(MockMvcResultMatchers.jsonPath("id").isNotEmpty())
-			.andExpect(MockMvcResultMatchers.jsonPath("title").value("Meu livro"))
-			.andExpect(MockMvcResultMatchers.jsonPath("author").value("Author"))
-			.andExpect(MockMvcResultMatchers.jsonPath("isbn").value("1213212"));
+			.andExpect(status().isCreated())
+			.andExpect(jsonPath("id").isNotEmpty())
+			.andExpect(jsonPath("title").value("Meu livro"))
+			.andExpect(jsonPath("author").value("Author"))
+			.andExpect(jsonPath("isbn").value("1213212"));
 		
 	}
 	
