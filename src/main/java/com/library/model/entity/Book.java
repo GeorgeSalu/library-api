@@ -1,13 +1,11 @@
-package com.library.api.dto;
+package com.library.model.entity;
 
-import com.library.model.entity.Book;
+public class Book {
 
-public class BookDTO {
 	private Long id;
 	private String title;
 	private String author;
 	private String isbn;
-
 
 	public Long getId() {
 		return id;
@@ -39,16 +37,6 @@ public class BookDTO {
 
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
-	}
-
-	public static BookDTO builder(Book entity) {
-		BookDTO bookDTO = new BookDTO();
-		bookDTO.setId(entity.getId());
-		bookDTO.setAuthor(entity.getAuthor());
-		bookDTO.setTitle(entity.getTitle());
-		bookDTO.setIsbn(entity.getIsbn());
-		
-		return bookDTO;
 	}
 
 }
