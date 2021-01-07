@@ -1,6 +1,7 @@
 package com.library.service;
 
-import org.assertj.core.api.Assertions;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -49,10 +50,10 @@ public class BookServiceTest {
 		Book savedBook = service.save(book);
 		
 		//verificacao
-		Assertions.assertThat(savedBook.getId()).isNotNull();
-		Assertions.assertThat(savedBook.getIsbn()).isEqualTo("123");
-		Assertions.assertThat(savedBook.getTitle()).isEqualTo("As aventuras");
-		Assertions.assertThat(savedBook.getAuthor()).isEqualTo("Fulano");
+		assertThat(savedBook.getId()).isNotNull();
+		assertThat(savedBook.getIsbn()).isEqualTo("123");
+		assertThat(savedBook.getTitle()).isEqualTo("As aventuras");
+		assertThat(savedBook.getAuthor()).isEqualTo("Fulano");
 	}
 }
 
