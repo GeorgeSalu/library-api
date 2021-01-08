@@ -118,7 +118,7 @@ public class BookControllerTest {
 	}
 	
 	@Test
-	@DisplayName("Deve obter informacoes de um livro")
+	@DisplayName("Deve obter informações de um livro")
 	public void getBookDetailsTest() throws Exception {
 		
 		//cenario
