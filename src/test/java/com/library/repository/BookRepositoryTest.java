@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import com.library.model.entity.Book;
 import com.library.model.repository.BookRepository;
 
 @ExtendWith(SpringExtension.class)
@@ -29,11 +30,21 @@ public class BookRepositoryTest {
 	public void returnTrueWhenIsbnExists() {
 		//cenario
 		String isbn = "123";
+		Book book = createValidBook(isbn);
+		entityManager.persist(book);
 		
 		//execucao
 		boolean exists = repository.existsByIsbn(isbn);
 		
 		//verificacao
 		assertThat(exists).isTrue();
+	}
+	
+	private Book createValidBook(String isbn) {
+		Book book = new Book();
+		book.setTitle("As aventuras");
+		book.setAuthor("Fulano");
+		book.setIsbn(isbn);
+		return book;
 	}
 }
