@@ -92,13 +92,14 @@ public class BookControllerTest {
 	}
 	
 	@Test
-	@DisplayName("Deve lançar erro ao tentar cadastrar um livo com isbn ja utilizado por outro.")
+	@DisplayName("Deve lançar erro ao tentar cadastrar um livro com isbn ja utilizado por outro.")
 	public void createBookWithDuplicatedIsbn() throws Exception {
 	
 		BookDTO dto = createNewBook();
 		String json = new ObjectMapper().writeValueAsString(dto);
+		String mensagemErro = "Isbn ja cadastrado";
 		BDDMockito.given(service.save(Mockito.any(Book.class)))
-					.willThrow(new BusinessExcetion("Isbn ja cadastrado"));
+					.willThrow(new BusinessExcetion(mensagemErro));
 		
 		MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
 				.post(BOOK_API)
@@ -110,7 +111,7 @@ public class BookControllerTest {
 			.perform(requestBuilder)
 			.andExpect(status().isBadRequest())
 			.andExpect(jsonPath("errors", hasSize(1)))
-			.andExpect(jsonPath("errors[0]").value("Isbn ja cadastrado"));
+			.andExpect(jsonPath("errors[0]").value(mensagemErro));
 		
 	}
 
