@@ -6,4 +6,6 @@ import com.library.model.entity.Book;
 
 public interface BookRepository extends JpaRepository<Book, Long>{
 
+	boolean existsByIsbn(String isbn);
+
 }
