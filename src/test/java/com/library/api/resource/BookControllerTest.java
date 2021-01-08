@@ -4,6 +4,8 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -113,6 +115,35 @@ public class BookControllerTest {
 			.andExpect(jsonPath("errors", hasSize(1)))
 			.andExpect(jsonPath("errors[0]").value(mensagemErro));
 		
+	}
+	
+	@Test
+	@DisplayName("Deve obter informacoes de um livro")
+	public void getBookDetailsTest() throws Exception {
+		
+		//cenario
+		Long id = 1l;
+		
+		Book book = new Book();
+		book.setId(id);
+		book.setTitle("As aventuras");
+		book.setAuthor("Artur");
+		book.setIsbn("001");
+		
+		BDDMockito.given(service.getById(id)).willReturn(Optional.of(book));
+		
+		//execucao
+		MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+			.get(BOOK_API.concat("/"+id))
+			.accept(MediaType.APPLICATION_JSON);
+			
+		mvc
+			.perform(request)
+			.andExpect(status().isOk())
+			.andExpect(jsonPath("id").value(id))
+			.andExpect(jsonPath("title").value(book.getTitle()))
+			.andExpect(jsonPath("author").value(book.getAuthor()))
+			.andExpect(jsonPath("isbn").value(book.getIsbn()));
 	}
 
 
