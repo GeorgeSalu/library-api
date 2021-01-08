@@ -234,7 +234,7 @@ public class BookControllerTest {
 	}
 	
 	@Test
-	@DisplayName("Deve retornar 404 ao tentar atualziar um livro inexistente.")
+	@DisplayName("Deve retornar 404 ao tentar atualizar um livro inexistente.")
 	public void updateInexistentBookTest() throws Exception {
 		String json = new ObjectMapper().writeValueAsString(createNewBook());
 		BDDMockito.given(service.getById(Mockito.anyLong()))
