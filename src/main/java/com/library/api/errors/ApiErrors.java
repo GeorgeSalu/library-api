@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.springframework.validation.BindingResult;
 
-import com.library.exception.BusinessExcetion;
+import com.library.exception.BusinessException;
 
 public class ApiErrors {
 	private List<String> errors;
@@ -16,7 +16,7 @@ public class ApiErrors {
 		bindingResult.getAllErrors().forEach(error -> this.errors.add(error.getDefaultMessage()));
 	}
 	
-	public ApiErrors(BusinessExcetion ex) {
+	public ApiErrors(BusinessException ex) {
 		this.errors = Arrays.asList(ex.getMessage());
 	}
 

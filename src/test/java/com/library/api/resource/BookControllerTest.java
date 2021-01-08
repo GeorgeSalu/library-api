@@ -23,7 +23,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.library.api.dto.BookDTO;
 import com.library.api.service.BookService;
-import com.library.exception.BusinessExcetion;
+import com.library.exception.BusinessException;
 import com.library.model.entity.Book;
 
 @ExtendWith(SpringExtension.class)
@@ -99,7 +99,7 @@ public class BookControllerTest {
 		String json = new ObjectMapper().writeValueAsString(dto);
 		String mensagemErro = "Isbn ja cadastrado";
 		BDDMockito.given(service.save(Mockito.any(Book.class)))
-					.willThrow(new BusinessExcetion(mensagemErro));
+					.willThrow(new BusinessException(mensagemErro));
 		
 		MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
 				.post(BOOK_API)
