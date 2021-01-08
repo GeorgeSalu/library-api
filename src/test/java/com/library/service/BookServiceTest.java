@@ -87,7 +87,7 @@ public class BookServiceTest {
 		//execucao
 		Optional<Book> foundBook = service.getById(id);
 		
-		//verificacaoes
+		//verificacoes
 		Assertions.assertThat(foundBook.isPresent()).isTrue();
 		Assertions.assertThat(foundBook.get().getId()).isEqualTo(id);
 		Assertions.assertThat(foundBook.get().getAuthor()).isEqualTo(book.getAuthor());
@@ -104,7 +104,7 @@ public class BookServiceTest {
 		//execucao
 		Optional<Book> book = service.getById(id);
 		
-		//verificacaoes
+		//verificacoes
 		Assertions.assertThat(book.isPresent()).isFalse();
 	}
 	
