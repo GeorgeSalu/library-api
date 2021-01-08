@@ -92,7 +92,7 @@ public class BookControllerTest {
 	}
 	
 	@Test
-	@DisplayName("Deve lançar erro ao tentar cadastrar um livro com isbn ja utilizado por outro.")
+	@DisplayName("Deve lançar erro ao tentar cadastrar um livro com isbn já utilizado por outro.")
 	public void createBookWithDuplicatedIsbn() throws Exception {
 	
 		BookDTO dto = createNewBook();
