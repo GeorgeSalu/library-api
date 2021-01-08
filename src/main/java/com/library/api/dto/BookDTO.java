@@ -41,7 +41,7 @@ public class BookDTO {
 		this.isbn = isbn;
 	}
 
-	public static BookDTO builder(Book entity) {
+	public static BookDTO criaDto(Book entity) {
 		BookDTO bookDTO = new BookDTO();
 		bookDTO.setId(entity.getId());
 		bookDTO.setAuthor(entity.getAuthor());
