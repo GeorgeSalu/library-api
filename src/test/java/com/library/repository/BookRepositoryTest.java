@@ -69,6 +69,17 @@ public class BookRepositoryTest {
 		assertThat(foundBook.isPresent()).isTrue();
 	}
 	
+	@Test
+	@DisplayName("Deve salvar um livro")
+	public void saveBookTest() {
+		Book book = createValidBook("123");
+		
+		Book savedBook = repository.save(book);
+		
+		//verificacao
+		assertThat(savedBook.getId()).isNotNull();
+	}
+	
 	private Book createValidBook(String isbn) {
 		Book book = new Book();
 		book.setTitle("As aventuras");
