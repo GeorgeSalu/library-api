@@ -3,11 +3,11 @@ package com.library.api.dto;
 import com.library.model.entity.Book;
 
 public class BookDTO {
+
 	private Long id;
 	private String title;
 	private String author;
 	private String isbn;
-
 
 	public Long getId() {
 		return id;
@@ -47,7 +47,7 @@ public class BookDTO {
 		bookDTO.setAuthor(entity.getAuthor());
 		bookDTO.setTitle(entity.getTitle());
 		bookDTO.setIsbn(entity.getIsbn());
-		
+
 		return bookDTO;
 	}
 
