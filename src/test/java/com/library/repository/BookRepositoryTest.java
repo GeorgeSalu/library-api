@@ -80,6 +80,22 @@ public class BookRepositoryTest {
 		assertThat(savedBook.getId()).isNotNull();
 	}
 	
+	@Test
+	@DisplayName("Deve deletar um livro")
+	public void deleteBookTest() {
+		
+		Book book = createValidBook("123");
+		entityManager.persist(book);
+		
+		Book foundBook = entityManager.find(Book.class, book.getId());
+		
+		repository.delete(foundBook);
+		
+		Book deletedBook = entityManager.find(Book.class, book.getId());
+		assertThat(deletedBook).isNull();
+		
+	}
+	
 	private Book createValidBook(String isbn) {
 		Book book = new Book();
 		book.setTitle("As aventuras");
