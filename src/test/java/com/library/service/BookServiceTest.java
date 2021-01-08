@@ -132,6 +132,40 @@ public class BookServiceTest {
 		Mockito.verify(repository, Mockito.never()).delete(book);
 	}
 	
+	@Test
+	@DisplayName("Deve ocorrer erro ao tentar atualziar um livro inexistente.")
+	public void updateInvalidBookTest() {
+		Book book = new Book();
+		
+		org.junit.jupiter.api.Assertions.assertThrows(IllegalArgumentException.class,
+				() -> service.update(book));
+
+		Mockito.verify(repository, Mockito.never()).save(book);
+	}
+	
+	@Test
+	@DisplayName("Deve atualizar um livro.")
+	public void updateBookTest() {
+		Long id = 1l;
+		Book updatingBook = new Book();
+		updatingBook.setId(id);
+		
+		//simulacao
+		Book updateBook = createValidBook();
+		updateBook.setId(id);
+		
+		Mockito.when(repository.save(updatingBook)).thenReturn(updateBook);
+		
+		//execucao
+		Book book = service.update(updatingBook);
+		
+		//verificacaoes
+		Assertions.assertThat(book.getId()).isEqualTo(updateBook.getId());
+		Assertions.assertThat(book.getTitle()).isEqualTo(updateBook.getTitle());
+		Assertions.assertThat(book.getIsbn()).isEqualTo(updateBook.getIsbn());
+		
+	}
+	
 	private Book createValidBook() {
 		Book book = new Book();
 		book.setIsbn("123");
