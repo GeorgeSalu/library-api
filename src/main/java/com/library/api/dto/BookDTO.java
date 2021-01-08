@@ -1,12 +1,17 @@
 package com.library.api.dto;
 
+import javax.validation.constraints.NotEmpty;
+
 import com.library.model.entity.Book;
 
 public class BookDTO {
 
 	private Long id;
+	@NotEmpty
 	private String title;
+	@NotEmpty
 	private String author;
+	@NotEmpty
 	private String isbn;
 
 	public Long getId() {
