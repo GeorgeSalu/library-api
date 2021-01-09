@@ -259,6 +259,7 @@ public class BookControllerTest {
 	@Test
 	@DisplayName("Deve filtrar livros")
 	public void findBookTest() throws Exception {
+		//cenario
 		Long id = 1l;
 		
 		Book book = new Book();
@@ -274,10 +275,12 @@ public class BookControllerTest {
 		String queryString = String.format("?title=%s&author=%s&page=0&size=100", 
 				book.getTitle(), book.getAuthor());
 		
+		//execucao
 		MockHttpServletRequestBuilder request = MockMvcRequestBuilders
 			.get(BOOK_API.concat(queryString))
 			.accept(MediaType.APPLICATION_JSON);
 		
+		//verificacao
 		mvc
 			.perform(request)
 			.andExpect(status().isOk())
