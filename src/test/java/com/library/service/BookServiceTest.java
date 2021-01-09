@@ -176,7 +176,7 @@ public class BookServiceTest {
 	@Test
 	@DisplayName("Deve filtrar livros pelas propriedades")
 	public void findBookTest() {
-		
+		//cenario
 		Book book = createValidBook();
 		
 		PageRequest pageRequest = PageRequest.of(0, 10);
@@ -185,13 +185,14 @@ public class BookServiceTest {
 		Mockito.when(repository.findAll(Mockito.any(Example.class), Mockito.any(PageRequest.class)))
 			.thenReturn(page);
 		
+		//execucao
 		Page<Book> result = service.find(book, pageRequest);
 		
+		//verificacao
 		assertThat(result.getTotalElements()).isEqualTo(1);
 		assertThat(result.getContent()).isEqualTo(lista);
 		assertThat(result.getPageable().getPageNumber()).isEqualTo(0);
 		assertThat(result.getPageable().getPageSize()).isEqualTo(10);
-		
 	}
 	
 	private Book createValidBook() {
