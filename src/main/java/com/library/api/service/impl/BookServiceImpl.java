@@ -1,7 +1,9 @@
 package com.library.api.service.impl;
 
+import java.awt.print.Pageable;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import com.library.api.service.BookService;
@@ -45,6 +47,12 @@ public class BookServiceImpl implements BookService {
 			throw new IllegalArgumentException("Book id cant be null");
 		}
 		return this.repository.save(book);
+	}
+
+	@Override
+	public Page<Book> find(Book filter, Pageable pageRequest) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
