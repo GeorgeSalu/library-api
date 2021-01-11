@@ -1,11 +1,13 @@
 package com.library.api.resource;
 
+import static org.hamcrest.Matchers.hasSize;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDate;
 import java.util.Optional;
 
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,7 +23,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.library.api.dto.LoanDTO;
@@ -81,7 +82,7 @@ public class LoanControllerTest {
 		//verificacao
 		mvc.perform(request)
 			.andExpect(status().isCreated())
-			.andExpect(MockMvcResultMatchers.content().string("1"));
+			.andExpect(content().string("1"));
 	}
 	
 	@Test
@@ -105,8 +106,8 @@ public class LoanControllerTest {
 		//verificacao
 		mvc.perform(request)
 			.andExpect(status().isBadRequest())
-			.andExpect(MockMvcResultMatchers.jsonPath("errors", Matchers.hasSize(1)))
-			.andExpect(MockMvcResultMatchers.jsonPath("errors[0]").value("Book not found for passed isbn"));
+			.andExpect(jsonPath("errors", hasSize(1)))
+			.andExpect(jsonPath("errors[0]").value("Book not found for passed isbn"));
 	
 	}
 	
