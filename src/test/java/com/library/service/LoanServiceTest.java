@@ -56,6 +56,7 @@ public class LoanServiceTest {
 		savedLoan.setCustomer("Fulano");
 	
 		//execucao
+		when(loanRepository.existsByBookAndNotReturned(book)).thenReturn(false);
 		when(loanRepository.save(savingLoan)).thenReturn(savedLoan);
 		
 		Loan loan = loanService.save(savingLoan);
