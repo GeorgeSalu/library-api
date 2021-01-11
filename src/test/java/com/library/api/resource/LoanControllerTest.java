@@ -21,6 +21,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.library.api.dto.LoanDTO;
@@ -80,7 +81,7 @@ public class LoanControllerTest {
 		//verificacao
 		mvc.perform(request)
 			.andExpect(status().isCreated())
-			.andExpect(jsonPath("id").value(1l));
+			.andExpect(MockMvcResultMatchers.content().string("1"));
 	}
 	
 }

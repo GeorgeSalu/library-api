@@ -2,6 +2,8 @@ package com.library.model.entity;
 
 import java.time.LocalDate;
 
+import com.library.api.dto.LoanDTO;
+
 public class Loan {
 	private Long id;
 	private String customer;
@@ -47,6 +49,15 @@ public class Loan {
 
 	public void setReturned(Boolean returned) {
 		this.returned = returned;
+	}
+
+	public static Loan criaLoan(LoanDTO dto, Book book) {
+
+		Loan loan = new Loan();
+		loan.setBook(book);
+		loan.setCustomer(dto.getCustomer());
+		loan.setLoanDate(LocalDate.now());
+		return loan;
 	}
 
 }
