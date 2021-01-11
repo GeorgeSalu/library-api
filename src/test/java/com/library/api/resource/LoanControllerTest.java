@@ -104,7 +104,7 @@ public class LoanControllerTest {
 		
 		//verificacao
 		mvc.perform(request)
-			.andExpect(status().isCreated())
+			.andExpect(status().isBadRequest())
 			.andExpect(MockMvcResultMatchers.jsonPath("errors", Matchers.hasSize(1)))
 			.andExpect(MockMvcResultMatchers.jsonPath("errors[0]").value("Book not found for passed isbn"));
 	
