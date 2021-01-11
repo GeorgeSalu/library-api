@@ -35,7 +35,7 @@ public class LoanServiceTest {
 	@Test
 	@DisplayName("Deve salvar um emprestimo")
 	public void saveLoanTest() {
-		
+		//cenario
 		Book book = new Book();
 		book.setId(1l);
 		
@@ -49,13 +49,17 @@ public class LoanServiceTest {
 		savedLoan.setLoanDate(LocalDate.now());
 		savedLoan.setBook(book);
 		savedLoan.setCustomer("Fulano");
-		
+	
+		//execucao
 		Mockito.when(loanRepository.save(savingLoan)).thenReturn(savedLoan);
 		
 		Loan loan = loanService.save(savingLoan);
 		
+		//verificacao
 		Assertions.assertThat(loan.getId()).isEqualTo(savedLoan.getId());
 		Assertions.assertThat(loan.getBook().getId()).isEqualTo(savedLoan.getBook().getId());
+		Assertions.assertThat(loan.getCustomer()).isEqualTo(savedLoan.getCustomer());
+		Assertions.assertThat(loan.getLoanDate()).isEqualTo(savedLoan.getLoanDate());
 	}
 	
 }
