@@ -28,6 +28,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.library.api.dto.LoanDTO;
 import com.library.api.service.BookService;
 import com.library.api.service.LoanService;
+import com.library.exception.BusinessException;
 import com.library.model.entity.Book;
 import com.library.model.entity.Loan;
 
@@ -111,4 +112,36 @@ public class LoanControllerTest {
 	
 	}
 	
+	@Test
+	@DisplayName("Deve retornar erro ao tentar fazer emprestimo de um livro empresatado.")
+	public void loanedBookErrorOnCreatedLoanTest() throws Exception {
+		//cenario
+		Book book = new Book();
+		book.setId(1l);
+		book.setIsbn("123");
+		
+		LoanDTO dto = new LoanDTO();
+		dto.setIsbn("123");
+		dto.setCustomer("Fulano");
+		
+		String json = new ObjectMapper().writeValueAsString(dto);
+		
+		//execucao
+		BDDMockito.given(bookService.getBookByIsbn("123")).willReturn(Optional.of(book));
+		
+		BDDMockito.given(loadService.save(Mockito.any(Loan.class)))
+			.willThrow(new BusinessException("Book already loaned"));
+
+		MockHttpServletRequestBuilder request = MockMvcRequestBuilders.post(LOAN_API)
+				.accept(MediaType.APPLICATION_JSON)
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(json);
+		
+		//verificacao
+		mvc.perform(request)
+			.andExpect(status().isBadRequest())
+			.andExpect(jsonPath("errors", hasSize(1)))
+			.andExpect(jsonPath("errors[0]").value("Book already loaned"));
+	
+	}
 }
