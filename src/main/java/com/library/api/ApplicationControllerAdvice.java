@@ -15,7 +15,6 @@ import com.library.exception.BusinessException;
 @RestControllerAdvice
 public class ApplicationControllerAdvice {
 
-
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
 	public ApiErrors handleValidationException(MethodArgumentNotValidException ex) {
@@ -31,7 +30,7 @@ public class ApplicationControllerAdvice {
 		
 	@ExceptionHandler(ResponseStatusException.class)
 	@ResponseStatus
-	public ResponseEntity handleReponseStatusException(ResponseStatusException ex) {
-		return new ResponseEntity(new ApiErrors(ex), ex.getStatus());
+	public ResponseEntity<ApiErrors> handleReponseStatusException(ResponseStatusException ex) {
+		return new ResponseEntity<ApiErrors>(new ApiErrors(ex), ex.getStatus());
 	}
 }
