@@ -1,5 +1,6 @@
 package com.library.api.resource;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
@@ -23,6 +24,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.library.api.dto.LoanDTO;
 import com.library.api.service.BookService;
+import com.library.api.service.LoanService;
 import com.library.model.entity.Book;
 import com.library.model.entity.Loan;
 
@@ -40,11 +42,14 @@ public class LoanControllerTest {
 	@MockBean
 	BookService bookService;
 	
+	@MockBean
+	LoanService loadService;
+	
 	
 	@Test
 	@DisplayName("Deve realizar um emprestimo.")
 	public void createLoanTest() throws Exception {
-		
+		//cenario
 		LoanDTO dto = new LoanDTO();
 		dto.setIsbn("123");
 		dto.setCustomer("Fulano");
@@ -53,16 +58,25 @@ public class LoanControllerTest {
 		book.setId(1l);
 		book.setIsbn("123");
 		
+		Loan loan = new Loan();
+		loan.setId(1l);
+		loan.setCustomer("Fulano");
+		loan.setBook(book);
+		loan.setLoanDate(LocalDate.now());
+		
+		
 		String json = new ObjectMapper().writeValueAsString(dto);
 		
+		//execucao
 		BDDMockito.given(bookService.getBookByIsbn("123")).willReturn(Optional.of(book));
-		//BDDMockito.given(loanService.save(Mockito.any(Loan.class)));
+		BDDMockito.given(loadService.save(Mockito.any(Loan.class))).willReturn(loan);
 		
 		MockHttpServletRequestBuilder request = MockMvcRequestBuilders.post(LOAN_API)
 			.accept(MediaType.APPLICATION_JSON)
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(json);
 		
+		//verificacao
 		mvc.perform(request)
 			.andExpect(MockMvcResultMatchers.status().isCreated())
 			.andExpect(MockMvcResultMatchers.jsonPath("id").value(1l));
