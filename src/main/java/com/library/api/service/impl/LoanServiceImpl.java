@@ -10,12 +10,10 @@ public class LoanServiceImpl implements LoanService{
 
 	public LoanServiceImpl(LoanRepository loanRepository) {
 		this.loanRepository = loanRepository;
-		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
 	public Loan save(Loan loan) {
-		// TODO Auto-generated method stub
 		return loanRepository.save(loan);
 	}
 
