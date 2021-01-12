@@ -167,6 +167,8 @@ public class LoanControllerTest {
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(json)
 		).andExpect(status().isOk());
+		
+		Mockito.verify(loadService, Mockito.times(1)).update(loan);
 	}
 }
 
