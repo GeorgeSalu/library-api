@@ -31,7 +31,7 @@ public class LoanServiceImpl implements LoanService{
 	@Override
 	public Loan update(Loan loan) {
 		// TODO Auto-generated method stub
-		return null;
+		return loanRepository.save(loan);
 	}
 
 }
