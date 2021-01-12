@@ -10,6 +10,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -52,6 +54,23 @@ public class LoanRepositoryTest {
 	@Test
 	@DisplayName("Deve buscar emprestimos pelo isbn do livro ou customer")
 	public void findByBookIsbnOrCustomerTest() {
+		
+		// cenario
+		Book book = createValidBook("123");
+		entityManager.persist(book);
+		
+		Loan loan = new Loan();
+		loan.setBook(book);
+		loan.setCustomer("Fulano");
+		loan.setLoanDate(LocalDate.now());
+		
+		
+		entityManager.persist(loan);
+		
+		Page<Loan> result = repository.findByBookIsbnOrCustomer("123", "Fulano", PageRequest.of(0, 10));
+		
+		assertThat(result.getContent()).hasSize(1);
+		assertThat(result.getPageable().getPageSize()).isEqualTo(10);
 		
 	}
 	
