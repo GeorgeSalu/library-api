@@ -19,7 +19,7 @@ public class Loan {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column
+	@Column(length = 100)
 	private String customer;
 	
 	@JoinColumn(name = "id_book")
