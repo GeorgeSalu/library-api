@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
 import org.hamcrest.Matchers;
@@ -85,6 +86,37 @@ public class LoanServiceTest {
 		
 		assertThat(exception).isInstanceOf(BusinessException.class).hasMessage("Book already loaned");
 		
+	}
+	
+	@Test
+	@DisplayName("Deve obter as informações de um emprestimo pelo ID")
+	public void getLoanDetaislTest() {
+		//cenario
+		Loan loan = createLoan();
+		loan.setId(1l);
+		
+		Mockito.when(loanRepository.findById(1l)).thenReturn(Optional.of(loan));
+		
+		//execucao
+		Optional<Loan> result = loanService.getById(1l);
+		
+		//verificacao
+		assertThat(result.isPresent()).isTrue();
+		assertThat(result.get().getId()).isEqualTo(1l);
+		assertThat(result.get().getCustomer()).isEqualTo(loan.getCustomer());
+		
+		Mockito.verify(loanRepository).findById(1l);
+	}
+	
+	public Loan createLoan() {
+		Book book = new Book();
+		book.setId(1l);
+		
+		Loan savingLoan = new Loan();
+		savingLoan.setBook(book);
+		savingLoan.setCustomer("Fulano");
+		savingLoan.setLoanDate(LocalDate.now());
+		return savingLoan;
 	}
 	
 }
