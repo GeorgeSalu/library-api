@@ -200,7 +200,7 @@ public class LoanControllerTest {
 	
 	@Test
 	@DisplayName("Deve filtrar emprestimos")
-	public void findBookTest() throws Exception {
+	public void findLoanTest() throws Exception {
 		//cenario
 	
 		Book book = new Book();
