@@ -34,13 +34,11 @@ public class LoanServiceImpl implements LoanService{
 
 	@Override
 	public Loan update(Loan loan) {
-		// TODO Auto-generated method stub
 		return loanRepository.save(loan);
 	}
 
 	@Override
 	public Page<Loan> find(LoanFilterDTO filterDTO, Pageable pageable) {
-		// TODO Auto-generated method stub
 		return loanRepository.findByBookIsbnOrCustomer(filterDTO.getIsbn(), filterDTO.getCustomer(), pageable);
 	}
 
