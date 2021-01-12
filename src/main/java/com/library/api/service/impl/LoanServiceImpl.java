@@ -1,5 +1,7 @@
 package com.library.api.service.impl;
 
+import java.util.Optional;
+
 import com.library.api.service.LoanService;
 import com.library.exception.BusinessException;
 import com.library.model.entity.Loan;
@@ -19,6 +21,18 @@ public class LoanServiceImpl implements LoanService{
 			throw new BusinessException("Book already loaned");
 		}
 		return loanRepository.save(loan);
+	}
+
+	@Override
+	public Optional<Loan> getById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Loan update(Loan loan) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

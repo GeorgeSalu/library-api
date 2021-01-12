@@ -1,6 +1,7 @@
 package com.library.api.resource;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -26,6 +27,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.library.api.dto.LoanDTO;
+import com.library.api.dto.ReturnedLoanDTO;
 import com.library.api.service.BookService;
 import com.library.api.service.LoanService;
 import com.library.exception.BusinessException;
@@ -144,4 +146,33 @@ public class LoanControllerTest {
 			.andExpect(jsonPath("errors[0]").value("Book already loaned"));
 	
 	}
+	
+	@Test
+	@DisplayName("Deve retornar um livro")
+	public void returnBookTest() throws Exception {
+		// cenario { returned: true }
+		ReturnedLoanDTO dto = new ReturnedLoanDTO();
+		dto.setReturned(true);
+		
+		Loan loan = new Loan();
+		loan.setId(1l);
+		
+		BDDMockito.given(loadService.getById(Mockito.anyLong())).willReturn(Optional.of(loan));
+		
+		String json = new ObjectMapper().writeValueAsString(dto);
+		
+		mvc.perform(
+			patch(LOAN_API.concat("/1"))
+			.accept(MediaType.APPLICATION_JSON)
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(json)
+		).andExpect(status().isOk());
+	}
 }
+
+
+
+
+
+
+

@@ -1,6 +1,10 @@
 package com.library.api.resource;
 
+import java.security.Provider.Service;
+
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.library.api.dto.LoanDTO;
+import com.library.api.dto.ReturnedLoanDTO;
 import com.library.api.service.BookService;
 import com.library.api.service.LoanService;
 import com.library.model.entity.Book;
@@ -34,5 +39,15 @@ public class LoanController {
 		Loan entity = Loan.criaLoan(dto, book);
 		entity = loanService.save(entity);
 		return entity.getId();
+	}
+	
+	@PatchMapping("{id}")
+	public void returnBook(
+			@PathVariable Long id, 
+			@RequestBody ReturnedLoanDTO dto) {
+		Loan loan = loanService.getById(id).get();
+		loan.setReturned(dto.getReturned());
+		
+		loanService.update(loan);
 	}
 }
