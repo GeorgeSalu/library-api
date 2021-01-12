@@ -214,7 +214,7 @@ public class LoanControllerTest {
 		BDDMockito.given(loadService.find(Mockito.any(LoanFilterDTO.class), Mockito.any(Pageable.class)))
 			.willReturn(new PageImpl<Loan>(Arrays.asList(loan), PageRequest.of(0, 10), 1));
 		
-		String queryString = String.format("?isbn=%s&customer=%s&page=0&size=100", 
+		String queryString = String.format("?isbn=%s&customer=%s&page=0&size=10", 
 				book.getIsbn(), loan.getCustomer());
 		
 		//execucao
@@ -228,7 +228,7 @@ public class LoanControllerTest {
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("content", Matchers.hasSize(1)))
 			.andExpect(jsonPath("totalElements").value(1))
-			.andExpect(jsonPath("pageable.pageSize").value(100))
+			.andExpect(jsonPath("pageable.pageSize").value(10))
 			.andExpect(jsonPath("pageable.pageNumber").value(0));
 	}
 	
