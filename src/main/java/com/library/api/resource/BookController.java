@@ -22,8 +22,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.library.api.dto.BookDTO;
+import com.library.api.dto.LoanDTO;
 import com.library.api.service.BookService;
+import com.library.api.service.LoanService;
 import com.library.model.entity.Book;
+import com.library.model.entity.Loan;
 
 @RestController
 @RequestMapping("/api/books")
@@ -31,10 +34,12 @@ public class BookController {
 	
 	private BookService service;
 	private ModelMapper modelMapper;
+	private LoanService loanService;
 	
-	public BookController(BookService service, ModelMapper modelMapper) {
+	public BookController(BookService service, ModelMapper modelMapper, LoanService loanService) {
 		this.service = service;
 		this.modelMapper = modelMapper;
+		this.loanService = loanService;
 	}
 
 	@PostMapping
@@ -81,4 +86,20 @@ public class BookController {
 		return new PageImpl<BookDTO>(list, pageRequest, result.getTotalElements());
 	}
 	
+	@GetMapping("{id}/loans")
+	public Page<LoanDTO> loansByBook(@PathVariable Long id, Pageable pageable){
+		Book book = service.getById(id)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+		Page<Loan> result = loanService.getLoansByBook(book, pageable);
+		List<LoanDTO> list = result.getContent()
+			.stream()
+			.map(loan -> {
+				Book loanBook = loan.getBook();
+				BookDTO bookDTO = modelMapper.map(loanBook, BookDTO.class);
+				LoanDTO loanDTO = modelMapper.map(loan, LoanDTO.class);
+				loanDTO.setBook(bookDTO);
+				return loanDTO;
+			}).collect(Collectors.toList());
+		return new PageImpl<LoanDTO>(list, pageable, result.getTotalElements());
+	}
 }
