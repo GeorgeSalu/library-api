@@ -3,6 +3,7 @@ package com.library.repository;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -71,6 +72,50 @@ public class LoanRepositoryTest {
 		
 		assertThat(result.getContent()).hasSize(1);
 		assertThat(result.getPageable().getPageSize()).isEqualTo(10);
+		
+	}
+	
+	@Test
+	@DisplayName("Deve obter emprestimos cuja data emprestimo dorm meno ou igual a tres dias atras e não retornados")
+	public void findByLoanDateLessThanAndNotReturnedTest() {
+		
+		// cenario
+		Book book = createValidBook("123");
+		entityManager.persist(book);
+		
+		Loan loan = new Loan();
+		loan.setBook(book);
+		loan.setCustomer("Fulano");
+		loan.setLoanDate(LocalDate.now());
+		loan.setLoanDate(LocalDate.now().minusDays(5));
+		
+		entityManager.persist(loan);
+		
+		List<Loan> result = repository.findByLoanDateLessThanAndNotReturned(LocalDate.now().minusDays(4));
+		
+		assertThat(result).hasSize(1).contains(loan);
+		
+	}
+	
+	@Test
+	@DisplayName("Deve retornar vazio quando não tiver houver emprestimos atrasados")
+	public void notfindByLoanDateLessThanAndNotReturnedTest() {
+		
+		// cenario
+		Book book = createValidBook("123");
+		entityManager.persist(book);
+		
+		Loan loan = new Loan();
+		loan.setBook(book);
+		loan.setCustomer("Fulano");
+		loan.setLoanDate(LocalDate.now());
+		loan.setLoanDate(LocalDate.now());
+		
+		entityManager.persist(loan);
+		
+		List<Loan> result = repository.findByLoanDateLessThanAndNotReturned(LocalDate.now().minusDays(4));
+		
+		assertThat(result).isEmpty();
 		
 	}
 	
