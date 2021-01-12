@@ -49,6 +49,12 @@ public class LoanRepositoryTest {
 		assertThat(exists).isTrue();
 	}
 	
+	@Test
+	@DisplayName("Deve buscar emprestimos pelo isbn do livro ou customer")
+	public void findByBookIsbnOrCustomerTest() {
+		
+	}
+	
 	private Book createValidBook(String isbn) {
 		Book book = new Book();
 		book.setTitle("As aventuras");
