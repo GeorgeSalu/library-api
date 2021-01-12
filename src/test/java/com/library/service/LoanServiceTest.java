@@ -90,7 +90,7 @@ public class LoanServiceTest {
 	
 	@Test
 	@DisplayName("Deve obter as informações de um emprestimo pelo ID")
-	public void getLoanDetaislTest() {
+	public void getLoanDetailsTest() {
 		//cenario
 		Loan loan = createLoan();
 		loan.setId(1l);
