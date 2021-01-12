@@ -65,6 +65,7 @@ public class LoanControllerTest {
 		LoanDTO dto = new LoanDTO();
 		dto.setIsbn("123");
 		dto.setCustomer("Fulano");
+		dto.setCustomerEmail("customer@gmail.com");
 		
 		Book book = new Book();
 		book.setId(1l);

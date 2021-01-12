@@ -1,10 +1,16 @@
 package com.library.api.dto;
 
+import javax.validation.constraints.NotEmpty;
+
 public class LoanDTO {
 
 	private Long id;
+	@NotEmpty
 	private String isbn;
+	@NotEmpty
 	private String customer;
+	@NotEmpty
+	private String customerEmail;
 	private BookDTO book;
 
 	public String getIsbn() {
@@ -37,6 +43,14 @@ public class LoanDTO {
 
 	public void setBook(BookDTO book) {
 		this.book = book;
+	}
+
+	public String getCustomerEmail() {
+		return customerEmail;
+	}
+
+	public void setCustomerEmail(String customerEmail) {
+		this.customerEmail = customerEmail;
 	}
 
 }

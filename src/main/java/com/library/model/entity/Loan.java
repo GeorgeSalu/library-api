@@ -22,6 +22,9 @@ public class Loan {
 	@Column(length = 100)
 	private String customer;
 	
+	@Column(name = "customer_email")
+	private String customerEmail;
+	
 	@JoinColumn(name = "id_book")
 	@ManyToOne
 	private Book book;
@@ -70,6 +73,14 @@ public class Loan {
 
 	public void setReturned(Boolean returned) {
 		this.returned = returned;
+	}
+
+	public String getCustomerEmail() {
+		return customerEmail;
+	}
+
+	public void setCustomerEmail(String customerEmail) {
+		this.customerEmail = customerEmail;
 	}
 
 	public static Loan criaLoan(LoanDTO dto, Book book) {
