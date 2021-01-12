@@ -1,6 +1,10 @@
 package com.library.api.resource;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.library.api.dto.LoanDTO;
+import com.library.api.dto.LoanFilterDTO;
 import com.library.api.dto.ReturnedLoanDTO;
 import com.library.api.service.BookService;
 import com.library.api.service.LoanService;
@@ -48,5 +53,11 @@ public class LoanController {
 		loan.setReturned(dto.getReturned());
 		
 		loanService.update(loan);
+	}
+	
+	@GetMapping
+	public Page<LoanDTO> find(LoanFilterDTO dto, Pageable pageRequest) {
+		Page<Loan> result = loanService.find(dto, pageRequest);
+		return null;
 	}
 }

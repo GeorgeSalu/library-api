@@ -7,8 +7,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Optional;
 
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,6 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -27,6 +32,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.library.api.dto.LoanDTO;
+import com.library.api.dto.LoanFilterDTO;
 import com.library.api.dto.ReturnedLoanDTO;
 import com.library.api.service.BookService;
 import com.library.api.service.LoanService;
@@ -190,6 +196,51 @@ public class LoanControllerTest {
 			.content(json)
 		).andExpect(status().isNotFound());
 		
+	}
+	
+	@Test
+	@DisplayName("Deve filtrar emprestimos")
+	public void findBookTest() throws Exception {
+		//cenario
+	
+		Book book = new Book();
+		book.setId(1l);
+		book.setIsbn("321");
+		
+		Loan loan = createLoan();
+		loan.setId(1l);
+		loan.setBook(book);
+		
+		BDDMockito.given(loadService.find(Mockito.any(LoanFilterDTO.class), Mockito.any(Pageable.class)))
+			.willReturn(new PageImpl<Loan>(Arrays.asList(loan), PageRequest.of(0, 10), 1));
+		
+		String queryString = String.format("?isbn=%s&customer=%s&page=0&size=100", 
+				book.getIsbn(), loan.getCustomer());
+		
+		//execucao
+		MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+			.get(LOAN_API.concat(queryString))
+			.accept(MediaType.APPLICATION_JSON);
+		
+		//verificacao
+		mvc
+			.perform(request)
+			.andExpect(status().isOk())
+			.andExpect(jsonPath("content", Matchers.hasSize(1)))
+			.andExpect(jsonPath("totalElements").value(1))
+			.andExpect(jsonPath("pageable.pageSize").value(100))
+			.andExpect(jsonPath("pageable.pageNumber").value(0));
+	}
+	
+	public Loan createLoan() {
+		Book book = new Book();
+		book.setId(1l);
+		
+		Loan savingLoan = new Loan();
+		savingLoan.setBook(book);
+		savingLoan.setCustomer("Fulano");
+		savingLoan.setLoanDate(LocalDate.now());
+		return savingLoan;
 	}
 }
 

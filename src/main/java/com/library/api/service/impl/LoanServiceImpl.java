@@ -2,6 +2,10 @@ package com.library.api.service.impl;
 
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import com.library.api.dto.LoanFilterDTO;
 import com.library.api.service.LoanService;
 import com.library.exception.BusinessException;
 import com.library.model.entity.Loan;
@@ -32,6 +36,12 @@ public class LoanServiceImpl implements LoanService{
 	public Loan update(Loan loan) {
 		// TODO Auto-generated method stub
 		return loanRepository.save(loan);
+	}
+
+	@Override
+	public Page<Loan> find(LoanFilterDTO filterDTO, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
