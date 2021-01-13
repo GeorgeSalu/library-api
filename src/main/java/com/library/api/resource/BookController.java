@@ -28,8 +28,12 @@ import com.library.api.service.LoanService;
 import com.library.model.entity.Book;
 import com.library.model.entity.Loan;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/api/books")
+@Api("Book api")
 public class BookController {
 	
 	private BookService service;
@@ -44,6 +48,7 @@ public class BookController {
 
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
+	@ApiOperation("create a book")
 	public BookDTO create(@RequestBody @Valid BookDTO dto) {
 		Book entity = modelMapper.map(dto, Book.class);
 		entity = service.save(entity);
@@ -51,6 +56,7 @@ public class BookController {
 	}
 	
 	@GetMapping("{id}")
+	@ApiOperation("Obtains a book details by id")
 	public BookDTO get(@PathVariable Long id) {
 		return service
 					.getById(id)
