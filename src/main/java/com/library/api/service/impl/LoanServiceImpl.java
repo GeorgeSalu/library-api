@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import com.library.api.dto.LoanFilterDTO;
 import com.library.api.service.LoanService;
@@ -14,6 +15,7 @@ import com.library.model.entity.Book;
 import com.library.model.entity.Loan;
 import com.library.model.repository.LoanRepository;
 
+@Service
 public class LoanServiceImpl implements LoanService{
 
 	private LoanRepository loanRepository;
