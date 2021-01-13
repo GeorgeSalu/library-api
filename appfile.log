@@ -30,3 +30,11 @@
 2021-01-13 11:31:31.183  INFO 4090 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
 2021-01-13 11:31:31.189  INFO 4090 --- [main] com.library.LibraryApplication           : Started LibraryApplication in 15.198 seconds (JVM running for 16.666)
 2021-01-13 11:31:31.507  WARN 4090 --- [registrationTask1] d.c.b.a.c.r.ApplicationRegistrator       : Failed to register application as Application(name=spring-boot-application, managementUrl=http://pc:8080/actuator, healthUrl=http://pc:8080/actuator/health, serviceUrl=http://pc:8080/) at spring-boot-admin ([http://localhost:8081/instances]): I/O error on POST request for "http://localhost:8081/instances": Conexão recusada; nested exception is java.net.ConnectException: Conexão recusada. Further attempts are logged on DEBUG level
+2021-01-13 11:46:51.984  INFO 4090 --- [SpringContextShutdownHook] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
+2021-01-13 11:46:51.985  INFO 4090 --- [SpringContextShutdownHook] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService
+2021-01-13 11:46:51.986  INFO 4090 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-01-13 11:46:51.995  INFO 4090 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-01-13 11:46:51.996  INFO 4090 --- [SpringContextShutdownHook] .SchemaDropperImpl$DelayedDropActionImpl : HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2021-01-13 11:46:51.999 ERROR 4090 --- [SpringContextShutdownHook] .SchemaDropperImpl$DelayedDropActionImpl : HHH000478: Unsuccessful: drop table book if exists
+2021-01-13 11:46:52.030  INFO 4090 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-01-13 11:46:52.039  INFO 4090 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
