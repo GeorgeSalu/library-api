@@ -17,14 +17,17 @@ import com.library.api.service.EmailService;
 @EnableScheduling
 public class LibraryApplication {
 	
+	/*
 	@Autowired
 	private EmailService emailService;
+	*/
 
 	@Bean
 	public ModelMapper modelMapper() {
 		return new ModelMapper();
 	}
 	
+	/*
 	@Bean
 	public CommandLineRunner runner() {
 		return args -> {
@@ -33,6 +36,7 @@ public class LibraryApplication {
 			System.out.println("emails envidos");
 		};
 	}
+	*/
 	
 	public static void main(String[] args) {
 		SpringApplication.run(LibraryApplication.class, args);
