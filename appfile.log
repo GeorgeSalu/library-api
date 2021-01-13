@@ -1,0 +1,32 @@
+2021-01-13 11:31:17.423  INFO 4090 --- [main] com.library.LibraryApplication           : Starting LibraryApplication on pc with PID 4090 (/home/salu/Documentos/library/target/classes started by salu in /home/salu/Documentos/library)
+2021-01-13 11:31:17.435  INFO 4090 --- [main] com.library.LibraryApplication           : No active profile set, falling back to default profiles: default
+2021-01-13 11:31:21.504  INFO 4090 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-01-13 11:31:21.675  INFO 4090 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 147ms. Found 2 repository interfaces.
+2021-01-13 11:31:23.092  INFO 4090 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-01-13 11:31:23.776  INFO 4090 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-01-13 11:31:23.796  INFO 4090 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-01-13 11:31:23.797  INFO 4090 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
+2021-01-13 11:31:24.055  INFO 4090 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-01-13 11:31:24.057  INFO 4090 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 6285 ms
+2021-01-13 11:31:24.844  INFO 4090 --- [main] o.s.b.a.e.web.ServletEndpointRegistrar   : Registered '/actuator/jolokia' to jolokia-actuator-endpoint
+2021-01-13 11:31:25.039  INFO 4090 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-01-13 11:31:25.431  INFO 4090 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-01-13 11:31:25.550  INFO 4090 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-01-13 11:31:25.708  INFO 4090 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.4.8.Final}
+2021-01-13 11:31:26.056  INFO 4090 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-01-13 11:31:26.279  INFO 4090 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2021-01-13 11:31:27.674  INFO 4090 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-01-13 11:31:27.686  INFO 4090 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-01-13 11:31:29.227  WARN 4090 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-01-13 11:31:29.551  INFO 4090 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 15 endpoint(s) beneath base path '/actuator'
+2021-01-13 11:31:29.928  INFO 4090 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-01-13 11:31:30.288  INFO 4090 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService
+2021-01-13 11:31:30.461  INFO 4090 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2021-01-13 11:31:30.532  INFO 4090 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-01-13 11:31:30.595  INFO 4090 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-01-13 11:31:30.619  INFO 4090 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-01-13 11:31:31.039  INFO 4090 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: createUsingPOST_1
+2021-01-13 11:31:31.056  INFO 4090 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: findUsingGET_1
+2021-01-13 11:31:31.183  INFO 4090 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-01-13 11:31:31.189  INFO 4090 --- [main] com.library.LibraryApplication           : Started LibraryApplication in 15.198 seconds (JVM running for 16.666)
+2021-01-13 11:31:31.507  WARN 4090 --- [registrationTask1] d.c.b.a.c.r.ApplicationRegistrator       : Failed to register application as Application(name=spring-boot-application, managementUrl=http://pc:8080/actuator, healthUrl=http://pc:8080/actuator/health, serviceUrl=http://pc:8080/) at spring-boot-admin ([http://localhost:8081/instances]): I/O error on POST request for "http://localhost:8081/instances": Conexão recusada; nested exception is java.net.ConnectException: Conexão recusada. Further attempts are logged on DEBUG level
